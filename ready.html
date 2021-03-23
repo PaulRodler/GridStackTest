@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GridStack Test</title>
+    <style type="text/css">
+        .grid-stack { border: 1px solid #CACACA; max-height: 100vh;}
+        .grid-stack>.grid-stack-item>.grid-stack-item-content { overflow-y: hidden !important;}
+        .grid-stack-item-content { background-color: #2C284A; border-radius: 5px; color: #CACACA; }
+    </style>
+    <script src="node_modules/gridstack/dist/gridstack-h5.js"></script>
+    <script src="events.js"></script>
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="node_modules/gridstack/dist/gridstack.min.css" rel="stylesheet"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+</head>
+<body style="background-color: #201C3C; overflow-x: hidden!important;">
+<div class="grid-stack"></div>
+
+<script type="text/javascript">
+
+    let locked1000 = false;
+    let locked780 = false;
+    let locked2000 = false;
+
+    let options = {
+        staticGrid: true,
+    }
+
+    console.log(localStorage.getItem('grid-stack'));
+    var strItems = JSON.parse(localStorage.getItem('grid-stack'));
+    var grid = GridStack.init(options);
+    grid.load(strItems);
+
+
+    function resizeGrid() {
+        let width = $('.grid-stack').outerWidth();
+        //let width = document.body.clientWidth;
+        console.log('resize width - '+ width);
+        console.log('COLUMN ====> '+ grid.getColumn());
+        if(width < 780){
+            grid.column(6);
+            if(!locked780){
+                var save = grid.save();
+                save.forEach(function (item){
+                    console.log(item);
+                    item.w = item.w+3;
+                    item.h = item.h-1;
+                })
+                hardReload(save);
+                grid.compact();
+                locked780 = true;
+                locked1000 = false;
+                locked2000 = false;
+            }
+        }
+        else if(width < 1000) {
+            if(!locked1000){
+                var save = grid.save();
+                save.forEach(function (item){
+                    console.log(item);
+                    item.w = item.w+2;
+                    item.h = item.h-1;
+                })
+                hardReload(save);
+                grid.compact();
+                locked1000 = true;
+                locked2000 = true;
+            }
+        } else if(width < 1200) {
+            locked1000 = false;
+            locked2000 = false;
+            locked780 = false;
+        }else if(width < 2000){
+            if(!locked2000){
+                var save = strItems;
+                save.forEach(function (item){
+                    console.log(item);
+                    item.h = item.h-1;
+                });
+                hardReload(save);
+                grid.compact();
+                locked1000 = true;
+            }
+            locked1000 = false;
+            locked780 = false;
+        }
+        /*if (width < 700) {
+            grid.column(1, 'moveScale');
+        } else if (width < 850) {
+            grid.column(3, 'moveScale');
+        } else if (width < 950) {
+            grid.column(6, 'moveScale');
+        } else if (width < 1100) {
+            grid.column(8, 'moveScale');
+        } else {
+            grid.column(12, 'moveScale');
+        }
+        if (width < 600) {
+            grid.column(1);
+        }else if(width < 800) {
+            grid.column(6);
+            var save = grid.save();
+            save.forEach(function (item){
+                item.w = item.w+1;
+                item.h = item.h-1;
+            })
+            hardReload(save);
+        } else {
+            grid.column(12);
+            hardReload(strItems);
+        }*/
+    }
+
+    function hardReload(save){
+        grid.removeAll();
+        grid.load(save);
+        console.log(save);
+    }
+    resizeGrid();
+    window.addEventListener('resize', function (){resizeGrid()});
+
+
+</script>
+</body>
+</html>

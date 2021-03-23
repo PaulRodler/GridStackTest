@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GridStack Test</title>
+    <style type="text/css">
+        .grid-stack { border: 1px solid #CACACA}
+        .grid-stack>.grid-stack-item>.grid-stack-item-content { overflow-y: hidden !important;}
+        .grid-stack-item-content { background-color: #2C284A; border-radius: 5px; color: #CACACA; }
+        .item{ margin: 5px;}
+        .trash {
+            height: 100px;
+            margin-bottom: 20px;
+            background: rgba(255, 0, 0, 0.1) center center url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTYuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjY0cHgiIGhlaWdodD0iNjRweCIgdmlld0JveD0iMCAwIDQzOC41MjkgNDM4LjUyOSIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNDM4LjUyOSA0MzguNTI5OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxnPgoJPGc+CgkJPHBhdGggZD0iTTQxNy42ODksNzUuNjU0Yy0xLjcxMS0xLjcwOS0zLjkwMS0yLjU2OC02LjU2My0yLjU2OGgtODguMjI0TDMwMi45MTcsMjUuNDFjLTIuODU0LTcuMDQ0LTcuOTk0LTEzLjA0LTE1LjQxMy0xNy45ODkgICAgQzI4MC4wNzgsMi40NzMsMjcyLjU1NiwwLDI2NC45NDUsMGgtOTEuMzYzYy03LjYxMSwwLTE1LjEzMSwyLjQ3My0yMi41NTQsNy40MjFjLTcuNDI0LDQuOTQ5LTEyLjU2MywxMC45NDQtMTUuNDE5LDE3Ljk4OSAgICBsLTE5Ljk4NSw0Ny42NzZoLTg4LjIyYy0yLjY2NywwLTQuODUzLDAuODU5LTYuNTY3LDIuNTY4Yy0xLjcwOSwxLjcxMy0yLjU2OCwzLjkwMy0yLjU2OCw2LjU2N3YxOC4yNzQgICAgYzAsMi42NjQsMC44NTUsNC44NTQsMi41NjgsNi41NjRjMS43MTQsMS43MTIsMy45MDQsMi41NjgsNi41NjcsMi41NjhoMjcuNDA2djI3MS44YzAsMTUuODAzLDQuNDczLDI5LjI2NiwxMy40MTgsNDAuMzk4ICAgIGM4Ljk0NywxMS4xMzksMTkuNzAxLDE2LjcwMywzMi4yNjQsMTYuNzAzaDIzNy41NDJjMTIuNTY2LDAsMjMuMzE5LTUuNzU2LDMyLjI2NS0xNy4yNjhjOC45NDUtMTEuNTIsMTMuNDE1LTI1LjE3NCwxMy40MTUtNDAuOTcxICAgIFYxMDkuNjI3aDI3LjQxMWMyLjY2MiwwLDQuODUzLTAuODU2LDYuNTYzLTIuNTY4YzEuNzA4LTEuNzA5LDIuNTctMy45LDIuNTctNi41NjRWODIuMjIxICAgIEM0MjAuMjYsNzkuNTU3LDQxOS4zOTcsNzcuMzY3LDQxNy42ODksNzUuNjU0eiBNMTY5LjMwMSwzOS42NzhjMS4zMzEtMS43MTIsMi45NS0yLjc2Miw0Ljg1My0zLjE0aDkwLjUwNCAgICBjMS45MDMsMC4zODEsMy41MjUsMS40Myw0Ljg1NCwzLjE0bDEzLjcwOSwzMy40MDRIMTU1LjMxMUwxNjkuMzAxLDM5LjY3OHogTTM0Ny4xNzMsMzgwLjI5MWMwLDQuMTg2LTAuNjY0LDguMDQyLTEuOTk5LDExLjU2MSAgICBjLTEuMzM0LDMuNTE4LTIuNzE3LDYuMDg4LTQuMTQxLDcuNzA2Yy0xLjQzMSwxLjYyMi0yLjQyMywyLjQyNy0yLjk5OCwyLjQyN0gxMDAuNDkzYy0wLjU3MSwwLTEuNTY1LTAuODA1LTIuOTk2LTIuNDI3ICAgIGMtMS40MjktMS42MTgtMi44MS00LjE4OC00LjE0My03LjcwNmMtMS4zMzEtMy41MTktMS45OTctNy4zNzktMS45OTctMTEuNTYxVjEwOS42MjdoMjU1LjgxNVYzODAuMjkxeiIgZmlsbD0iI2ZmOWNhZSIvPgoJCTxwYXRoIGQ9Ik0xMzcuMDQsMzQ3LjE3MmgxOC4yNzFjMi42NjcsMCw0Ljg1OC0wLjg1NSw2LjU2Ny0yLjU2N2MxLjcwOS0xLjcxOCwyLjU2OC0zLjkwMSwyLjU2OC02LjU3VjE3My41ODEgICAgYzAtMi42NjMtMC44NTktNC44NTMtMi41NjgtNi41NjdjLTEuNzE0LTEuNzA5LTMuODk5LTIuNTY1LTYuNTY3LTIuNTY1SDEzNy4wNGMtMi42NjcsMC00Ljg1NCwwLjg1NS02LjU2NywyLjU2NSAgICBjLTEuNzExLDEuNzE0LTIuNTY4LDMuOTA0LTIuNTY4LDYuNTY3djE2NC40NTRjMCwyLjY2OSwwLjg1NCw0Ljg1MywyLjU2OCw2LjU3QzEzMi4xODYsMzQ2LjMxNiwxMzQuMzczLDM0Ny4xNzIsMTM3LjA0LDM0Ny4xNzJ6IiBmaWxsPSIjZmY5Y2FlIi8+CgkJPHBhdGggZD0iTTIxMC4xMjksMzQ3LjE3MmgxOC4yNzFjMi42NjYsMCw0Ljg1Ni0wLjg1NSw2LjU2NC0yLjU2N2MxLjcxOC0xLjcxOCwyLjU2OS0zLjkwMSwyLjU2OS02LjU3VjE3My41ODEgICAgYzAtMi42NjMtMC44NTItNC44NTMtMi41NjktNi41NjdjLTEuNzA4LTEuNzA5LTMuODk4LTIuNTY1LTYuNTY0LTIuNTY1aC0xOC4yNzFjLTIuNjY0LDAtNC44NTQsMC44NTUtNi41NjcsMi41NjUgICAgYy0xLjcxNCwxLjcxNC0yLjU2OCwzLjkwNC0yLjU2OCw2LjU2N3YxNjQuNDU0YzAsMi42NjksMC44NTQsNC44NTMsMi41NjgsNi41N0MyMDUuMjc0LDM0Ni4zMTYsMjA3LjQ2NSwzNDcuMTcyLDIxMC4xMjksMzQ3LjE3MnogICAgIiBmaWxsPSIjZmY5Y2FlIi8+CgkJPHBhdGggZD0iTTI4My4yMiwzNDcuMTcyaDE4LjI2OGMyLjY2OSwwLDQuODU5LTAuODU1LDYuNTctMi41NjdjMS43MTEtMS43MTgsMi41NjItMy45MDEsMi41NjItNi41N1YxNzMuNTgxICAgIGMwLTIuNjYzLTAuODUyLTQuODUzLTIuNTYyLTYuNTY3Yy0xLjcxMS0xLjcwOS0zLjkwMS0yLjU2NS02LjU3LTIuNTY1SDI4My4yMmMtMi42NywwLTQuODUzLDAuODU1LTYuNTcxLDIuNTY1ICAgIGMtMS43MTEsMS43MTQtMi41NjYsMy45MDQtMi41NjYsNi41Njd2MTY0LjQ1NGMwLDIuNjY5LDAuODU1LDQuODUzLDIuNTY2LDYuNTdDMjc4LjM2NywzNDYuMzE2LDI4MC41NSwzNDcuMTcyLDI4My4yMiwzNDcuMTcyeiIgZmlsbD0iI2ZmOWNhZSIvPgoJPC9nPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+Cjwvc3ZnPgo=) no-repeat;}
+        .stack-library .grid-stack-item {
+            width: 150px;
+            height: 50px;
+            text-align: center;
+            line-height: 35px;
+            z-index: 10;
+            cursor: default;
+            display: inline-block;
+        }
+    </style>
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="node_modules/gridstack/dist/gridstack.min.css" rel="stylesheet"/>
+
+    <script src="node_modules/gridstack/dist/gridstack-h5.js"></script>
+    <script src="events.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+</head>
+<body style="background-color: #201C3C; ">
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="stack-library">
+                <div class="grid-stack-item">
+                    <div class="grid-stack-item-content" about="custom">Custom</div>
+                </div>
+                <div class="grid-stack-item" id="prompt">
+                    <div class="grid-stack-item-content">Drag me</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="trash">
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-9"><br>
+            <button onclick="saveItem(0)">Save</button>
+            <button onclick="preview(0)">Preview</button>
+            <button onclick="compact(0)">Compact</button>
+            <button onclick="grid[0].enable()">Enable Edit</button>
+            <br><br>
+            <div class="grid-stack grid-main"></div>
+        </div>
+        <div class="col-md-3"><br>
+            <button onclick="compact(1)">Compact</button>
+            <br><br>
+            <div class="grid-stack"></div>
+        </div>
+    </div>
+</div>
+
+
+    <script type="text/javascript">
+        var strItems = [];
+        var mainItems = [
+            {gridId: 0, x:0, y: 0, w: 3, h: 2, locked: true, noResize: true, noMove: true,  content: '15:30:00<br>Mittwoch<br>03.03.2021 <img class="img-circle" src="assets/pics/logo.svg"'},
+            {gridId: 0, w: 8, y: 0, content: 'Hallo Nimbus'},
+            {gridId: 0, w: 2, h: 1, content: 'Community', resizeHandles: 'e'},
+            {gridId: 0, w: 2, h: 1, content: 'Telefon'},
+            {gridId: 0, w: 2, h: 1, content: 'Newsletter'},
+            {gridId: 0, w: 2, h: 1, content: 'E-Mail'},
+            {w: 2, h: 1, content: 'SMS'},
+            {w: 2, h: 1, content: 'Offene Tickets'},
+            {w: 2, h: 1, content: 'Antworten heute'},
+            {w: 2, h: 1, content: 'Aktive Kunden'},
+            {w: 2, h: 1, content: 'In Demo'},
+            {w: 2, h: 1, content: 'In Umstellung'},
+            {w: 2, h: 1, content: '<button class="btn-danger">Error</button>'},
+            {w: 2, h: 1, content: 'Bounces'},
+            {w: 3, h: 2, content: 'Heute'},
+            {w: 3, h: 2, content: 'Morgen'},
+        ];
+        let options = {
+            resizable: {
+                handles: 'e, se, s' //sw, w
+            },
+            disableOneColumnMode: true,
+            float: true,
+            dragIn: '.stack-library .grid-stack-item',
+            dragInOptions: { revert: 'invalid', scroll: false, appendTo: 'body', helper: 'clone' },
+            removable: '.trash',
+            removeTimeout: 100,
+
+            //alwaysShowResizeHandle: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
+            acceptWidgets: function(el) { return true; }
+        }
+        var grid = GridStack.initAll(options);
+        grid[0].load(mainItems);
+
+        grid[1].load([
+            {w: 12, h: 3, content: '0'},
+            {w: 12, h: 3, content: '1'},
+            {w: 12, h: 3, content: 'Übermorgen'},
+        ]);
+        grid[1].float(false);
+        grid[1].enableResize(false);
+
+
+
+        function addItem(i){
+            grid[i].addWidget({w: 1, h: 0.5, content: 'added'});
+            lastItem = grid[0].getGridItems()[grid[0].getGridItems().length-1]
+            console.log(lastItem.setAttribute('gs-h', 3));
+
+        }
+        function saveItem(i){
+            console.log('save');
+            console.log(grid[i].save());
+            strItems = grid[i].save();
+        }
+        function preview(i){
+            console.log('preview');
+            localStorage.setItem('grid-stack', JSON.stringify(strItems));
+            console.log(localStorage.getItem('grid-stack'));
+
+            //grid[i].removeAll();
+            setTimeout(function (){
+                location.href= 'ready.html';
+                //grid[i].load(strItems);
+                //grid[i].disable();
+            }, 1000);
+
+        }
+        function compact(i){
+            console.log('compact');
+            grid[i].compact();
+        }
+        function resizeGrid() {
+            console.log('resize');
+            width = $('.grid-main').innerWidth();
+            if (width < 500) {
+                grid[0].column(1);
+            } else {
+                grid[0].column(12);
+            }
+
+        }
+
+        function hardReload(id){
+            var save = grid[id].save()
+            grid[id].removeAll();
+            grid[id].load(save);
+        }
+
+        resizeGrid();
+
+        window.addEventListener('resize', function (){resizeGrid()});
+        addEvents(grid[0], 0);
+        addEvents(grid[1], 1);
+
+    </script>
+</body>
+<script src="assets/js/bootstrap.min.js"></script>
+</html>
