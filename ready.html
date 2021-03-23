@@ -20,6 +20,7 @@
 <script type="text/javascript">
 
     let locked1000 = false;
+    let locked600 = false;
     let locked780 = false;
     let locked2000 = false;
 
@@ -34,11 +35,28 @@
 
 
     function resizeGrid() {
-        let width = $('.grid-stack').outerWidth();
+        let width = $('.grid-stack').innerWidth();
         //let width = document.body.clientWidth;
         console.log('resize width - '+ width);
         console.log('COLUMN ====> '+ grid.getColumn());
-        if(width < 780){
+        if(width < 600){
+            if(!locked600) {
+                grid.column(1);
+                var save = grid.save();
+                save.forEach(function (item) {
+                    console.log(item);
+                    item.w = 1;
+                    item.h = item.h + 3;
+                })
+                hardReload(save);
+                grid.compact();
+                locked600 = true;
+                locked780 = false;
+                locked1000 = false;
+                locked2000 = false;
+            }
+        }
+        else if(width < 780){
             grid.column(6);
             if(!locked780){
                 var save = grid.save();
@@ -55,12 +73,13 @@
             }
         }
         else if(width < 1000) {
+            grid.column(10);
             if(!locked1000){
                 var save = grid.save();
                 save.forEach(function (item){
                     console.log(item);
                     item.w = item.w+2;
-                    item.h = item.h-1;
+                    item.h = item.h+1;
                 })
                 hardReload(save);
                 grid.compact();
